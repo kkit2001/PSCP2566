@@ -67,7 +67,7 @@ def UpdateData():
        result = tkMessageBox.showwarning('', 'Please Complete The Required Field', icon="warning")
     else:
         tree.delete(*tree.get_children())
-        conn = sqlite3.connect("pythontut.db")
+        conn = sqlite3.connect("PSCPproject.db")
         cursor = conn.cursor()
         cursor.execute("UPDATE `member` SET `firstname` = ?, `lastname` = ?, `gender` =?, `age` = ?,  `address` = ?, `contact` = ? WHERE `mem_id` = ?", (str(FIRSTNAME.get()), str(LASTNAME.get()), str(GENDER.get()), str(AGE.get()), str(ADDRESS.get()), str(CONTACT.get()), int(mem_id)))
         conn.commit()
@@ -170,7 +170,7 @@ def DeleteData():
             contents =(tree.item(curItem))
             selecteditem = contents['values']
             tree.delete(curItem)
-            conn = sqlite3.connect("pythontut.db")
+            conn = sqlite3.connect("PSCPproject.db")
             cursor = conn.cursor()
             cursor.execute("DELETE FROM `member` WHERE `mem_id` = %d" % selecteditem[0])
             conn.commit()
