@@ -41,7 +41,7 @@ def Database():
 #=====AddNewDataBase=====
 def SubmitData():
     if  FIRSTNAME.get() == "" or LASTNAME.get() == "" or GENDER.get() == "" or AGE.get() == "" or ADDRESS.get() == "" or CONTACT.get() == "":
-        result = tkMessageBox.showwarning('', 'Please Complete The Required Field', icon="warning")
+        result = tkMessageBox.showwarning('Missing Some Imformation', 'Please Complete The Required Field', icon="warning")
     else:
         tree.delete(*tree.get_children())
         conn = sqlite3.connect("PSCPproject.db")
@@ -64,7 +64,7 @@ def SubmitData():
 #=====ForUpdateData=====
 def UpdateData():
     if GENDER.get() == "":
-       result = tkMessageBox.showwarning('', 'Please Complete The Required Field', icon="warning")
+       result = tkMessageBox.showwarning('Missing Some Information', 'Please Complete The Required Field', icon="warning")
     else:
         tree.delete(*tree.get_children())
         conn = sqlite3.connect("PSCPproject.db")
@@ -162,9 +162,9 @@ def OnSelected(event):
 #=====ForDeleteData=====   
 def DeleteData():
     if not tree.selection():
-       result = tkMessageBox.showwarning('', 'Please Select Something First!', icon="warning")
+       result = tkMessageBox.showwarning('Did Not Selete Any Information', 'Please Select Something First!', icon="warning")
     else:
-        result = tkMessageBox.askquestion('', 'Are you sure you want to delete this record?', icon="warning")
+        result = tkMessageBox.askquestion('The Information Will Delete', 'Are you sure you want to delete this record?', icon="warning")
         if result == 'yes':
             curItem = tree.focus()
             contents =(tree.item(curItem))
