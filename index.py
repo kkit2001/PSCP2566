@@ -43,23 +43,26 @@ def SubmitData():
     if  FIRSTNAME.get() == "" or LASTNAME.get() == "" or GENDER.get() == "" or AGE.get() == "" or ADDRESS.get() == "" or CONTACT.get() == "":
         result = tkMessageBox.showwarning('Missing Some Imformation', 'Please Complete The Required Field', icon="warning")
     else:
-        tree.delete(*tree.get_children())
-        conn = sqlite3.connect("PSCPproject.db")
-        cursor = conn.cursor()
-        cursor.execute("INSERT INTO `member` (firstname, lastname, gender, age, address, contact) VALUES(?, ?, ?, ?, ?, ?)", (str(FIRSTNAME.get()), str(LASTNAME.get()), str(GENDER.get()), int(AGE.get()), str(ADDRESS.get()), str(CONTACT.get())))
-        conn.commit()
-        cursor.execute("SELECT * FROM `member` ORDER BY `lastname` ASC")
-        fetch = cursor.fetchall()
-        for data in fetch:
-            tree.insert('', 'end', values=(data))
-        cursor.close()
-        conn.close()
-        FIRSTNAME.set("")
-        LASTNAME.set("")
-        GENDER.set("")
-        AGE.set("")
-        ADDRESS.set("")
-        CONTACT.set("")
+        if AGE.get().isnumeric() != True:
+            result = tkMessageBox.showwarning('Error', 'Please enter your age in numbers.', icon="warning")
+        else:
+            tree.delete(*tree.get_children())
+            conn = sqlite3.connect("PSCPproject.db")
+            cursor = conn.cursor()
+            cursor.execute("INSERT INTO `member` (firstname, lastname, gender, age, address, contact) VALUES(?, ?, ?, ?, ?, ?)", (str(FIRSTNAME.get()), str(LASTNAME.get()), str(GENDER.get()), int(AGE.get()), str(ADDRESS.get()), str(CONTACT.get())))
+            conn.commit()
+            cursor.execute("SELECT * FROM `member` ORDER BY `lastname` ASC")
+            fetch = cursor.fetchall()
+            for data in fetch:
+                tree.insert('', 'end', values=(data))
+            cursor.close()
+            conn.close()
+            FIRSTNAME.set("")
+            LASTNAME.set("")
+            GENDER.set(" ") #ทำให้ตอนกด save ว่าง
+            AGE.set("")
+            ADDRESS.set("")
+            CONTACT.set("")
 
 #=====ForUpdateData=====
 def UpdateData():
@@ -99,6 +102,7 @@ def OnSelected(event):
     CONTACT.set("")
     FIRSTNAME.set(selecteditem[1])
     LASTNAME.set(selecteditem[2])
+    GENDER.set(selecteditem[3]) #แก้เลือกเพศตอน Update
     AGE.set(selecteditem[4])
     ADDRESS.set(selecteditem[5])
     CONTACT.set(selecteditem[6])
@@ -182,7 +186,7 @@ def AddNewWindow():
     global NewWindow
     FIRSTNAME.set("")
     LASTNAME.set("")
-    GENDER.set("")
+    GENDER.set(" ") #แก้ ทำให้จุดว่างทั้งสองตอนกด Add
     AGE.set("")
     ADDRESS.set("")
     CONTACT.set("")
