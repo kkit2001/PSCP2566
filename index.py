@@ -4,7 +4,7 @@ import sqlite3
 import tkinter.ttk as ttk
 import tkinter.messagebox as tkMessageBox
 
-
+#=============Mainpage1=============
 #=====MAIN WINDOW=====
 root = Tk()
 root.title("Contact List Project For PSCP2023")
@@ -25,6 +25,10 @@ GENDER = StringVar()
 AGE = StringVar()
 ADDRESS = StringVar()
 CONTACT = StringVar()
+
+#=======================================
+
+
 
 #=====DataBaseCreate=====
 def Database():
@@ -86,7 +90,10 @@ def UpdateData():
         AGE.set("")
         ADDRESS.set("")
         CONTACT.set("")
-        
+
+
+
+#===========changeformationpage===============
 #=====ForChangeSomeInformation=====  
 def OnSelected(event):
     global mem_id, UpdateWindow
@@ -156,11 +163,12 @@ def OnSelected(event):
     address.grid(row=4, column=1)
     contact = Entry(ContactForm, textvariable=CONTACT,  font=('arial', 14))
     contact.grid(row=5, column=1)
-    
 
     #=====BottonConfirm=====
     btn_updatecon = Button(ContactForm, text="Update", width=50, command=UpdateData)
     btn_updatecon.grid(row=6, columnspan=2, pady=10)
+
+#=======================================
 
 
 #=====ForDeleteData=====   
@@ -181,6 +189,8 @@ def DeleteData():
             cursor.close()
             conn.close()
 
+
+#===============Addnewpage================
 #=====ForAddNewContact=====
 def AddNewWindow():
     global NewWindow
@@ -240,16 +250,15 @@ def AddNewWindow():
     address.grid(row=4, column=1)
     contact = Entry(ContactForm, textvariable=CONTACT,  font=('arial', 14))
     contact.grid(row=5, column=1)
-    
 
     #=====BottonForSaveChange=====
     btn_addcon = Button(ContactForm, text="Save", width=50, command=SubmitData)
     btn_addcon.grid(row=6, columnspan=2, pady=10)
 
+#=======================================
 
 
-
-    
+#=============Mainpage2=============    
 #=====FrameOnTop=====
 Top = Frame(root, width=500, bd=1, relief=SOLID)
 Top.pack(side=TOP)
@@ -267,16 +276,6 @@ TableMargin.pack(side=TOP)
 #=====Label On Top=====
 lbl_title = Label(Top, text="PSCP Contact Management System",bg="#ffc77b", fg="#3B3301", font=('arial', 16), width=500)
 lbl_title.pack(fill=X)
-
-
-
-
-
-
-
-
-
-
 
 #=====Main page Botton=====
 btn_add = Button(MidLeft, text="+ ADD NEW", bg="#229a80", fg="#eefffc", font=('arial', 16), command=AddNewWindow)
@@ -309,6 +308,9 @@ tree.column('#6', stretch=NO, minwidth=0, width=120)
 tree.column('#7', stretch=NO, minwidth=0, width=120)
 tree.pack()
 tree.bind('<Double-Button-1>', OnSelected)
+
+#========================================
+
 
 #=====For Run The Program=====
 if __name__ == '__main__':
